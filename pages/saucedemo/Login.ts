@@ -3,7 +3,7 @@ import type { Page } from "@playwright/test";
 type UsernameOptions = "standard_user" | "locked_out_user" | "problem_user" | "performance_glitch_user" | "error_user" | "visual_user";
 
 class Login {
-  readonly page: Page;
+  private readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
