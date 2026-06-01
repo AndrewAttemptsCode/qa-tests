@@ -1,15 +1,11 @@
-import { expect, test } from "@playwright/test";
-import Login from "../../../pages/saucedemo/Login.js";
+import { expect } from "@playwright/test";
+import { test } from "../../../test-options/saucedemo-options.js";
 
 test.describe("Authentication", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto("/");
-  });
   
-  test("login with valid credentials", async ({ page }) => {
-    const login = new Login(page);
-    await login.loginWithUsername();
-    await expect(page.getByText("Products")).toBeVisible();
+  test("login with valid credentials", async ({ pm }) => {
+    await pm.login().loginWithUsername();
+    await expect(pm.page.getByText("Products")).toBeVisible();
   });
 
 });
