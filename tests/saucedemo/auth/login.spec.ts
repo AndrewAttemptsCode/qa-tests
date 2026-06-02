@@ -13,4 +13,9 @@ test.describe("Authentication", () => {
     await expect(pm.page.getByRole("heading", { name: /username and password do not match any user in this service/i })).toBeVisible();
   });
 
+  test("display invalid login with incorrect password", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "password123");
+    await expect(pm.page.getByRole("heading", { name: /username and password do not match any user in this service/i })).toBeVisible();
+  });
+
 });
