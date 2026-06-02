@@ -9,9 +9,9 @@ class Login {
     this.page = page;
   }
 
-  async loginWithUsername(username: UsernameOptions = "standard_user") {
+  async loginWithUsername(username: UsernameOptions, password: string) {
     await this.page.getByTestId("username").fill(username);
-    await this.page.getByTestId("password").fill("secret_sauce");
+    await this.page.getByTestId("password").fill(password);
     await this.page.getByTestId("login-button").click();
   }
 }
