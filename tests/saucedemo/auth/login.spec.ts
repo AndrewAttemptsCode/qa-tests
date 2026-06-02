@@ -23,4 +23,9 @@ test.describe("Authentication", () => {
     await expect(pm.page.getByRole("heading", { name: /username is required/i })).toBeVisible();
   });
 
+  test("display invalid login with empty password field", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "");
+    await expect(pm.page.getByRole("heading", { name: /password is required/i })).toBeVisible();
+  });
+
 });
