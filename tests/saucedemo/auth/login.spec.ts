@@ -4,7 +4,7 @@ import { test } from "../../../test-options/saucedemo-options.js";
 test.describe("Authentication", () => {
   
   test("login with valid credentials", async ({ pm }) => {
-    await pm.login().loginWithUsername();
+    await pm.login().loginWithUsername("standard_user", "secret_sauce");
     await expect(pm.page.getByText("Products")).toBeVisible();
   });
 
