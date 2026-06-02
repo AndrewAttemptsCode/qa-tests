@@ -1,6 +1,6 @@
 import type { Page } from "@playwright/test";
 
-type UsernameOptions = "standard_user" | "locked_out_user" | "problem_user" | "performance_glitch_user" | "error_user" | "visual_user" | "invalid_user";
+type UsernameOptions = "standard_user" | "locked_out_user" | "problem_user" | "performance_glitch_user" | "error_user" | "visual_user" | "invalid_user" | "";
 
 class Login {
   private readonly page: Page;
