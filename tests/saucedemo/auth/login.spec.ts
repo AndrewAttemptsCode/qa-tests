@@ -18,4 +18,9 @@ test.describe("Authentication", () => {
     await expect(pm.page.getByRole("heading", { name: /username and password do not match any user in this service/i })).toBeVisible();
   });
 
+  test("display invalid login with empty username field", async ({ pm }) => {
+    await pm.login().loginWithCredentials("", "secret_sauce");
+    await expect(pm.page.getByRole("heading", { name: /username is required/i })).toBeVisible();
+  });
+
 });
