@@ -8,4 +8,9 @@ test.describe("Authentication", () => {
     await expect(pm.page.getByText("Products")).toBeVisible();
   });
 
+  test("display login error with invalid username", async ({ pm }) => {
+    await pm.login().loginWithCredentials("invalid_user", "secret_sauce");
+    await expect(pm.page.getByRole("heading", { name: /username and password do not match any user in this service/i })).toBeVisible();
+  });
+
 });
