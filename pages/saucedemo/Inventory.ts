@@ -1,4 +1,4 @@
-import type { Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 class Inventory {
   private readonly page: Page;
@@ -7,9 +7,23 @@ class Inventory {
     this.page = page;
   }
 
+  private getProductButton(product: string) {
+    const item = this.page.getByTestId("inventory-item").filter({ has: this.page.getByTestId("inventory-item-name") }).filter({ hasText: new RegExp(product, "i") });
+    return item.getByRole("button"); 
+  }
+
   async addProductToCart(product: string) {
-    const selectedProduct = this.page.getByTestId("inventory-item").filter({ hasText: new RegExp(product, "i") });
-    await selectedProduct.getByRole("button", { name: /add to cart/i }).click();
+    const button = this.getProductButton(product);
+    await expect(button).toHaveText(/add to cart/i);
+    await button.click();
+    return button;
+  }
+
+  async removeProductFromCart(product: string) {
+    const button = this.getProductButton(product);
+    await expect(button).toHaveValue(/remove/i);
+    await button.click();
+    return button;
   }
 }
 
