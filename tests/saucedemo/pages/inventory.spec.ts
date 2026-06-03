@@ -9,4 +9,13 @@ test.describe("Inventory", () => {
     await expect(button).toHaveText(/remove/i);
   });
 
+  test("remove product from cart button updates state", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+
+    const button = await pm.inventory().removeProductFromCart("backpack");
+
+    await expect(button).toHaveText(/add to cart/i);
+  });
+
 });
