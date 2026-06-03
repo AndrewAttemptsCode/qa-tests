@@ -21,7 +21,7 @@ class Inventory {
 
   async removeProductFromCart(product: string) {
     const button = this.getProductButton(product);
-    await expect(button).toHaveValue(/remove/i);
+    await expect(button).toHaveText(/remove/i);
     await button.click();
     return button;
   }
