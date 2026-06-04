@@ -31,4 +31,21 @@ test.describe("Inventory", () => {
     }
   });
 
+  test("remove multiple products from cart, updates button states", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+    await pm.inventory().addProductToCart("bike light");
+    await pm.inventory().addProductToCart("onesie");
+
+    const product1 = await pm.inventory().removeProductFromCart("backpack");
+    const product2 = await pm.inventory().removeProductFromCart("bike light");
+    const product3 = await pm.inventory().removeProductFromCart("onesie");
+
+    const products = [product1, product2, product3];
+
+    for (const product of products) {
+      await expect(product).toHaveText(/add to cart/i);
+    }
+  });
+
 });
