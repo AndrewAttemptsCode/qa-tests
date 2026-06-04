@@ -18,4 +18,17 @@ test.describe("Inventory", () => {
     await expect(button).toHaveText(/add to cart/i);
   });
 
+  test("add multiple products to cart, updates button states", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    const product1 = await pm.inventory().addProductToCart("backpack");
+    const product2 = await pm.inventory().addProductToCart("bike light");
+    const product3 = await pm.inventory().addProductToCart("onesie");
+
+    const products = [product1, product2, product3];
+
+    for (const product of products) {
+      await expect(product).toHaveText(/remove/i);
+    }
+  });
+
 });
