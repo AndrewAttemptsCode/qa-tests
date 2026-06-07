@@ -15,6 +15,10 @@ class Cart {
   async openCart() {
     await this.page.getByTestId("shopping-cart-link").click();
   }
+
+  getProduct(productName: string) {
+    return this.page.getByTestId("inventory-item").filter({ hasText: new RegExp(productName, "i") });
+  }
 }
 
 export default Cart;
