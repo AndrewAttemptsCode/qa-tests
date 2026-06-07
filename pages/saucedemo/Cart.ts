@@ -11,6 +11,10 @@ class Cart {
     const indicator = this.page.getByTestId("shopping-cart-badge");
     await expect(indicator).toHaveText(value);
   }
+
+  async openCart() {
+    await this.page.getByTestId("shopping-cart-link").click();
+  }
 }
 
 export default Cart;
