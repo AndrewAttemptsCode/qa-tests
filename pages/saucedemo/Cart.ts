@@ -23,6 +23,12 @@ class Cart {
   getProduct(productName: string) {
     return this.page.getByTestId("inventory-item").filter({ hasText: new RegExp(productName, "i") });
   }
+
+  async removeProductFromCart(productName: string) {
+    const product = this.getProduct(productName);
+    await product.getByRole("button", { name: /remove/i }).click();
+    return product;
+  }
 }
 
 export default Cart;
