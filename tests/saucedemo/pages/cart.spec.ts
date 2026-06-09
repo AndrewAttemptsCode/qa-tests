@@ -34,4 +34,13 @@ test.describe("Cart", () => {
     await expect(product).not.toBeVisible();
     await expect(product).toHaveCount(0);
   });
+
+  test("navigates back to inventory page on 'Continue Shopping' button press", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    
+    await pm.cart().openCart();
+    await pm.cart().closeCart();
+
+    await expect(pm.page.getByText("Products")).toBeVisible();
+  });
 });
