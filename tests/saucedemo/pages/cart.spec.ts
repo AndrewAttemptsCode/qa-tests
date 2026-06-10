@@ -43,4 +43,13 @@ test.describe("Cart", () => {
 
     await expect(pm.page.getByText("Products")).toBeVisible();
   });
+
+  test("navigates to checkout page on 'Checkout' button press", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+    await pm.cart().openCart();
+    await pm.cart().checkout();
+
+    await expect(pm.page.getByText(/checkout: your information/i)).toBeVisible();
+  });
 });
