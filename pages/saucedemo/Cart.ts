@@ -29,6 +29,10 @@ class Cart {
     await product.getByRole("button", { name: /remove/i }).click();
     return product;
   }
+
+  async checkout() {
+    await this.page.getByRole("button", { name: /checkout/i }).click();
+  }
 }
 
 export default Cart;
