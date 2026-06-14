@@ -3,7 +3,7 @@ import { test } from "../../../test-options/saucedemo-options.js";
 import { faker } from "@faker-js/faker";
 
 test.describe("Checkout", () => {
-  test("valid customer infomation provided", async ({ pm }) => {
+  test("valid customer information provided", async ({ pm }) => {
     await pm.login().loginWithCredentials("standard_user", "secret_sauce");
     await pm.inventory().addProductToCart("backpack");
     await pm.cart().openCart();
