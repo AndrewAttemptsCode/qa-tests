@@ -42,4 +42,18 @@ test.describe("Checkout", () => {
 
     await expect(pm.page.getByRole("heading", { name: /error: first name is required/i })).toBeVisible();
   });
+
+  test("omit last name field returns an error", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+    await pm.cart().openCart();
+    await pm.cart().checkout();
+
+    const firstName = faker.person.firstName();
+    const postalCode = faker.location.zipCode();
+
+    await pm.checkout().withCustomerInfo(firstName, "", postalCode);
+
+    await expect(pm.page.getByRole("heading", { name: /error: last name is required/i })).toBeVisible();
+  });
 });
