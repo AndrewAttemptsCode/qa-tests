@@ -56,4 +56,18 @@ test.describe("Checkout", () => {
 
     await expect(pm.page.getByRole("heading", { name: /error: last name is required/i })).toBeVisible();
   });
+
+  test("omit postal code field returns an error", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+    await pm.cart().openCart();
+    await pm.cart().checkout();
+
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+
+    await pm.checkout().withCustomerInfo(firstName, lastName, "");
+
+    await expect(pm.page.getByRole("heading", { name: /error: postal code is required/i })).toBeVisible();
+  });
 });
