@@ -14,6 +14,10 @@ class Checkout {
 
     await this.page.getByTestId("continue").click();
   }
+
+  async abortCheckout() {
+    await this.page.getByRole("button", { name: /cancel/i }).click();
+  }
 }
 
 export default Checkout;
