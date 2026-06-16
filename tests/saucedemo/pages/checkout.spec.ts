@@ -70,4 +70,14 @@ test.describe("Checkout", () => {
 
     await expect(pm.page.getByRole("heading", { name: /error: postal code is required/i })).toBeVisible();
   });
+
+  test("cancel checkout from your information page returns to cart", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().addProductToCart("backpack");
+    await pm.cart().openCart();
+    await pm.cart().checkout();
+
+    await pm.checkout().abortCheckout();
+    await expect(pm.page.getByText(/your cart/i)).toBeVisible();
+  });
 });
