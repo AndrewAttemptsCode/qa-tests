@@ -18,6 +18,10 @@ class Checkout {
   async abortCheckout() {
     await this.page.getByRole("button", { name: /cancel/i }).click();
   }
+
+  async completeCheckout() {
+    await this.page.getByRole("button", { name: /finish/i }).click();
+  }
 }
 
 export default Checkout;
