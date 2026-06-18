@@ -22,6 +22,10 @@ class Checkout {
   async completeCheckout() {
     await this.page.getByRole("button", { name: /finish/i }).click();
   }
+
+  async backToHome() {
+    await this.page.getByRole("button", { name: /back home/i }).click();
+  }
 }
 
 export default Checkout;
