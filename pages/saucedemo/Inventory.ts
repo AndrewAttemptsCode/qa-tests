@@ -12,6 +12,10 @@ class Inventory {
     return item.getByRole("button"); 
   }
 
+  async openProductDetailsPage(product: string) {
+    this.page.getByTestId("inventory-item").filter({ has: this.page.getByTestId("inventory-item-name") }).filter({ hasText: new RegExp(product, "i") }).click(); 
+  }
+
   async addProductToCart(product: string) {
     const button = this.getProductButton(product);
     await expect(button).toHaveText(/add to cart/i);
