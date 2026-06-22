@@ -13,7 +13,7 @@ class Inventory {
   }
 
   async openProductDetailsPage(product: string) {
-    this.page.getByTestId("inventory-item").filter({ has: this.page.getByTestId("inventory-item-name") }).filter({ hasText: new RegExp(product, "i") }).click(); 
+    await this.page.getByTestId("inventory-item-name").filter({ hasText: new RegExp(product, "i") }).click();
   }
 
   async addProductToCart(product: string) {
