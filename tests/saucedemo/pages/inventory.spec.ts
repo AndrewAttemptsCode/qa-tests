@@ -48,4 +48,12 @@ test.describe("Inventory", () => {
     }
   });
 
+  test("select product name navigates to the product details page", async ({ pm }) => {
+    await pm.login().loginWithCredentials("standard_user", "secret_sauce");
+    await pm.inventory().openProductDetailsPage("backpack");
+
+    await expect(pm.page.getByText(/back to products/i)).toBeVisible();
+    await expect(pm.page).toHaveURL(/inventory-item/i);
+  });
+
 });
